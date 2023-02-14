@@ -1,5 +1,8 @@
 {
-  "name": "baas-react",
+  "name": "@omarsdev/baas-react",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/omarsdev"
+  },
   "version": "1.0.0",
   "description": "",
   "scripts": {
