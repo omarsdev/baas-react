@@ -8,9 +8,6 @@
     "typescript"
   ],
   "license": "ISC",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/omarsdev"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/omarsdev/baas-react.git"
