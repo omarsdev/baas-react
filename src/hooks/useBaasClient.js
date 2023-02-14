@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-export const useBaasClient = (url: string) => {
+const useBaasClient = (url) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -12,7 +12,7 @@ export const useBaasClient = (url: string) => {
         const data = await response.json();
         setData(data);
         setLoading(false);
-      } catch (err: any) {
+      } catch (err) {
         setError(err);
         setLoading(false);
       }
@@ -22,3 +22,5 @@ export const useBaasClient = (url: string) => {
 
   return { data, loading, error };
 };
+
+export default useBaasClient;
