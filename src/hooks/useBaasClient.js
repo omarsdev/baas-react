@@ -20,6 +20,7 @@ const useBaasClient = ({
   );
 
   useEffect(() => {
+    console.log({ referrer: document.referrer });
     const fetchData = async () => {
       try {
         const response = await fetch(
