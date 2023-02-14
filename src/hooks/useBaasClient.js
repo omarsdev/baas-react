@@ -20,7 +20,6 @@ const useBaasClient = ({
   );
 
   useEffect(() => {
-    console.log("Works");
     const fetchData = async () => {
       try {
         const response = await fetch(
