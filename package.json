@@ -1,6 +1,6 @@
 {
   "name": "@omarsdev/baas-react",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "",
   "author": "Omar Sukarieh",
   "keywords": [
@@ -8,7 +8,6 @@
     "typescript"
   ],
   "license": "ISC",
-  "private": true,
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/omarsdev"
   },
