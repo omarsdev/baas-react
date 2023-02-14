@@ -18,7 +18,7 @@ export default [
         file: packageJson.main,
         format: "cjs",
         sourcemap: true,
-        name: "thedevdesigner-react-lib",
+        name: "baas-react",
       },
       {
         file: packageJson.module,
