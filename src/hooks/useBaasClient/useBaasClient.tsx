@@ -1,23 +1,25 @@
-import { useState, useEffect, useMemo } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-import { URL_PROD, URL_QA } from '../../config'
+import { useDomainStore } from '../../store/domain'
 
 import { useBaasClientPropTypes } from './useBaasClientPropTypes'
 
 const useBaasClient = (props: useBaasClientPropTypes) => {
-  const { route, domain, passAnalysis = false, pageNumber = 1, connectToProd = true } = props
+  const { route, pageNumber = 1 } = props
+  const { domain, isSSR, urlConnection } = useDomainStore()
+
+  if (!domain) throw new Error(`Domain need to be set first, Please setup your domain first by using initDomain()`)
+
   const [data, setData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
-
-  const urlConnection = useMemo(() => (connectToProd ? URL_PROD : URL_QA), [connectToProd])
 
   useEffect(() => {
     const fetchData = async () => {
       await axios
         .get(
-          `${urlConnection}/page?route=${route}&domain=${domain}&pass${passAnalysis}&page=${pageNumber}&referrer=${document.referrer}`,
+          `${urlConnection}/page?route=${route}&domain=${domain}&pass=${isSSR}&page=${pageNumber}&referrer=${document.referrer}`,
         )
         .then((response) => {
           setData(response.data)
@@ -30,7 +32,7 @@ const useBaasClient = (props: useBaasClientPropTypes) => {
         })
     }
     fetchData()
-  }, [urlConnection, route, domain, passAnalysis, pageNumber])
+  }, [route, pageNumber, urlConnection, isSSR, domain])
 
   return { data, loading, error }
 }
