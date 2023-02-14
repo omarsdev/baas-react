@@ -20,6 +20,7 @@ const useBaasClient = ({
   );
 
   useEffect(() => {
+    console.log("Works");
     const fetchData = async () => {
       try {
         const response = await fetch(
@@ -34,7 +35,7 @@ const useBaasClient = ({
       }
     };
     fetchData();
-  }, [url]);
+  }, [urlConnection, route, domain, passAnalysis, pageNumber]);
 
   return { data, loading, error };
 };
