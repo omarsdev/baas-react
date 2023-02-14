@@ -7,7 +7,7 @@ import { useBaasClientPropTypes } from './useBaasClientPropTypes'
 
 const useBaasClient = (props: useBaasClientPropTypes) => {
   const { route, pageNumber = 1 } = props
-  const { domain, isSSR, urlConnection } = useDomainStore()
+  const { domain, passAnalysis, urlConnection } = useDomainStore()
 
   if (!domain) throw new Error(`Domain need to be set first, Please setup your domain first by using initDomain()`)
 
@@ -19,7 +19,7 @@ const useBaasClient = (props: useBaasClientPropTypes) => {
     const fetchData = async () => {
       await axios
         .get(
-          `${urlConnection}/page?route=${route}&domain=${domain}&pass=${isSSR}&page=${pageNumber}&referrer=${document.referrer}`,
+          `${urlConnection}/page?route=${route}&domain=${domain}&pass=${passAnalysis}&page=${pageNumber}&referrer=${document.referrer}`,
         )
         .then((response) => {
           setData(response.data)
@@ -32,7 +32,7 @@ const useBaasClient = (props: useBaasClientPropTypes) => {
         })
     }
     fetchData()
-  }, [route, pageNumber, urlConnection, isSSR, domain])
+  }, [route, pageNumber, urlConnection, passAnalysis, domain])
 
   return { data, loading, error }
 }
