@@ -21,11 +21,10 @@ const useBaasClient = ({
   );
 
   useEffect(() => {
-    console.log({ referrer: document.referrer });
     const fetchData = async () => {
       await axios
         .get(
-          `${urlConnection}/page?route=${route}&domain=${domain}&pass${passAnalysis}&page=${pageNumber}`
+          `${urlConnection}/page?route=${route}&domain=${domain}&pass${passAnalysis}&page=${pageNumber}&referrer=${document.referrer}`
         )
         .then((response) => {
           setData(response.data);
