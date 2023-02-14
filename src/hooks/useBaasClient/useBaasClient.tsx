@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useMemo } from "react";
-import PropTypes from "prop-types";
 import axios from "axios";
 
-import { URL_PROD, URL_QA } from "../config";
+import { URL_PROD, URL_QA } from "../../config";
 
-export const useBaasClient = ({
-  route,
-  domain,
-  passAnalysis,
-  pageNumber,
-  connectToProd,
-}) => {
+import { useBaasClientPropTypes } from "./useBaasClientPropTypes"
+
+const useBaasClient = (props: useBaasClientPropTypes) => {
+  const {
+    route,
+    domain,
+    passAnalysis = false,
+    pageNumber = 1,
+    connectToProd = true,
+  } = props
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -40,18 +42,6 @@ export const useBaasClient = ({
   }, [urlConnection, route, domain, passAnalysis, pageNumber]);
 
   return { data, loading, error };
-};
+};  
 
-useBaasClient.propTypes = {
-  route: PropTypes.string.isRequired,
-  domain: PropTypes.number.isRequired,
-  passAnalysis: PropTypes.bool,
-  pageNumber: PropTypes.number,
-  connectToProd: PropTypes.bool,
-};
-
-useBaasClient.defaultProps = {
-  passAnalysis: false,
-  pageNumber: 1,
-  connectToProd: true,
-};
+export default useBaasClient

@@ -1,32 +1,50 @@
-import babel from "@rollup/plugin-babel";
-import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
+import commonjs from "@rollup/plugin-commonjs";
+import typescript from "@rollup/plugin-typescript";
 import { terser } from "rollup-plugin-terser";
+import external from "rollup-plugin-peer-deps-external";
+import postcss from "rollup-plugin-postcss";
+import dts from "rollup-plugin-dts";
+import autoprefixer from "autoprefixer";
 import json from "@rollup/plugin-json";
 
-export default {
-  input: "src/index.js",
-  output: [
-    {
-      file: "dist/index.js",
-      format: "cjs",
-      sourcemap: true,
-    },
-    {
-      file: "dist/index.min.js",
-      format: "cjs",
-      sourcemap: true,
-      plugins: [terser()],
-    },
-  ],
-  plugins: [
-    peerDepsExternal(),
-    resolve(),
-    commonjs(),
-    babel({
-      exclude: "node_modules/**",
-    }),
-    json(),
-  ],
-};
+const packageJson = require("./package.json");
+
+export default [
+  {
+    input: "src/index.ts",
+    output: [
+      {
+        file: packageJson.main,
+        format: "cjs",
+        sourcemap: true,
+        name: "thedevdesigner-react-lib",
+      },
+      {
+        file: packageJson.module,
+        format: "esm",
+        sourcemap: true,
+      },
+    ],
+    plugins: [
+      external(),
+      resolve(),
+      commonjs(),
+      typescript({ tsconfig: "./tsconfig.json" }),
+      postcss({
+        plugins: [autoprefixer()],
+        minimize: true,
+        sourceMap: true,
+        extract: "styles.css",
+      }),
+      terser({ compress: true }),
+      json(),
+    ],
+  },
+  {
+    input: "dist/esm/index.d.ts",
+    output: [{ file: "dist/index.d.ts", format: "esm" }],
+    external: [/\.css$/],
+    plugins: [dts()],
+  },
+];
