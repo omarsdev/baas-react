@@ -1,5 +1,5 @@
 {
-  "name": "baas-react",
+  "name": "react-baas",
   "version": "1.0.0",
   "description": "",
   "author": "Omar Sukarieh",
@@ -10,10 +10,10 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "https://github.com/omarsdev/baas-react.git"
+    "url": "https://github.com/omarsdev/react-baas.git"
   },
   "bugs": {
-    "url": "https://github.com/omarsdev/baas-react/issues",
+    "url": "https://github.com/omarsdev/react-baas/issues",
     "email": "omarskdev@gmail.com"
   },
   "scripts": {
