@@ -1,1 +1,1 @@
-export { default as useBaasClient } from "./hooks/useBaasClient";
+export * from "./hooks/useBaasClient";

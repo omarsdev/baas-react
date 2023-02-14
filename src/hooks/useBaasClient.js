@@ -4,7 +4,7 @@ import axios from "axios";
 
 import { URL_PROD, URL_QA } from "../config";
 
-const useBaasClient = ({
+export const useBaasClient = ({
   route,
   domain,
   passAnalysis,
@@ -55,5 +55,3 @@ useBaasClient.defaultProps = {
   pageNumber: 1,
   connectToProd: true,
 };
-
-export { useBaasClient };
