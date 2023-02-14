@@ -23,5 +23,8 @@
     "rollup-plugin-terser": "^7.0.2"
   },
   "main": "dist/index.js",
-  "module": "src/index.js"
+  "module": "src/index.js",
+  "devDependencies": {
+    "prop-types": "^15.8.1"
+  }
 }
