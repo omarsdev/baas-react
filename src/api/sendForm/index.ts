@@ -8,6 +8,10 @@ export const sendForm = async (body: object) => {
 
   const result = { data: null, error: null }
 
+  if (!domain) {
+    throw new Error(`Domain need to be set first, Please setup your domain first by using initDomain()`)
+  }
+
   await axios
     .post(`${urlConnection}/contact-us?domainName=${domain}`, body)
     .then((response) => {
