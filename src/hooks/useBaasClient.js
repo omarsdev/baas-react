@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 
 import { URL_PROD, URL_QA } from "../config";
 
-const useBaasClient = ({
+const UseBaasClient = ({
   route,
   domain,
   passAnalysis,
@@ -40,7 +40,7 @@ const useBaasClient = ({
   return { data, loading, error };
 };
 
-useBaasClient.propTypes = {
+UseBaasClient.propTypes = {
   route: PropTypes.string.isRequired,
   domain: PropTypes.number.isRequired,
   passAnalysis: PropTypes.bool,
@@ -48,10 +48,10 @@ useBaasClient.propTypes = {
   connectToProd: PropTypes.bool,
 };
 
-useBaasClient.defaultProps = {
+UseBaasClient.defaultProps = {
   passAnalysis: false,
   pageNumber: 1,
   connectToProd: true,
 };
 
-export default useBaasClient;
+export default UseBaasClient;
