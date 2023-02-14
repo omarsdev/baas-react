@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
 
 import { URL_PROD, URL_QA } from "../config";
 
-const UseBaasClient = ({
+const useBaasClient = ({
   route,
   domain,
   passAnalysis,
@@ -22,17 +23,19 @@ const UseBaasClient = ({
   useEffect(() => {
     console.log({ referrer: document.referrer });
     const fetchData = async () => {
-      try {
-        const response = await fetch(
+      await axios
+        .get(
           `${urlConnection}/page?route=${route}&domain=${domain}&pass${passAnalysis}&page=${pageNumber}`
-        );
-        const data = await response.json();
-        setData(data);
-        setLoading(false);
-      } catch (err) {
-        setError(err);
-        setLoading(false);
-      }
+        )
+        .then((response) => {
+          setData(response.data);
+        })
+        .catch((err) => {
+          setError(err.response.data);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
     };
     fetchData();
   }, [urlConnection, route, domain, passAnalysis, pageNumber]);
@@ -40,7 +43,7 @@ const UseBaasClient = ({
   return { data, loading, error };
 };
 
-UseBaasClient.propTypes = {
+useBaasClient.propTypes = {
   route: PropTypes.string.isRequired,
   domain: PropTypes.number.isRequired,
   passAnalysis: PropTypes.bool,
@@ -48,10 +51,10 @@ UseBaasClient.propTypes = {
   connectToProd: PropTypes.bool,
 };
 
-UseBaasClient.defaultProps = {
+useBaasClient.defaultProps = {
   passAnalysis: false,
   pageNumber: 1,
   connectToProd: true,
 };
 
-export default UseBaasClient;
+export default useBaasClient;
