@@ -56,4 +56,4 @@ useBaasClient.defaultProps = {
   connectToProd: true,
 };
 
-export default useBaasClient;
+export { useBaasClient };
