@@ -1,3 +1,3 @@
-export * from './hooks'
+export { usePageData } from './hooks'
 export { initDomain } from './store/domain'
-export { sendForm } from './api'
+export { sendForm, getPageData } from './api'

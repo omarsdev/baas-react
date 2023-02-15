@@ -4,27 +4,31 @@ import { URL_PROD, URL_QA } from '../config'
 
 interface domainStorePropTypes {
   domain: string
-  isSSR: boolean
+  passAnalysis: boolean
   connectToProd: boolean
   urlConnection: string
+  isSSR: boolean
 }
 interface initDomainPropsTypes {
   domain: string
-  isSSR?: boolean
+  passAnalysis?: boolean
   connectToProd?: boolean
+  isSSR?: boolean
 }
 interface newDomainStorePropTypes {
   domain: string
-  isSSR?: boolean
+  passAnalysis?: boolean
   connectToProd?: boolean
   urlConnection?: string
+  isSSR?: boolean
 }
 
 const domainStore = devtools(() => ({
   domain: '',
-  isSSR: false,
+  passAnalysis: false,
   connectToProd: true,
   urlConnection: URL_PROD,
+  isSSR: false,
 }))
 
 export const useDomainStore = create<domainStorePropTypes>()(domainStore)
@@ -37,7 +41,11 @@ export const initDomain = (props: initDomainPropsTypes) => {
   }
 
   if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-    newData = { ...newData, isSSR: true }
+    newData = { ...newData, passAnalysis: true }
+  }
+
+  if (props.isSSR !== undefined && props.isSSR) {
+    newData = { ...newData, passAnalysis: true }
   }
 
   useDomainStore.setState(newData)

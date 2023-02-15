@@ -1,1 +1,1 @@
-export { default as useBaasClient } from './useBaasClient'
+export { default as usePageData } from './usePageData'
