@@ -9,7 +9,7 @@ initDomain({
 })
 
 export default function Home({ data, error }) {
-  // this for set analysis about how many visitors you got and so on
+  // this for set analysis about how many visitors you got and so on.
   usePageData({
     route: '/',
   })
